@@ -2,6 +2,8 @@ package com.thenitro.mvcutils.statemachine {
 	import starling.display.Sprite;
 
 	public class State extends Sprite {
+		private var _constructed:Boolean;
+
 		private var _machine:StateMachine;
 		private var _id:String;
 		
@@ -16,12 +18,22 @@ package com.thenitro.mvcutils.statemachine {
 			return _id;
 		};
 		
-		public function get machine():StateMachine {
+		public final function get machine():StateMachine {
 			return _machine;
 		};
 
+		public final function get constructed():Boolean {
+			return _constructed;
+		};
+
 		[PostConstruct]
-		public function postConstruct():void {
+		public final function postConstruct():void {
+			if (!_constructed) {
+				construct();
+			}
+
+			_constructed = true;
+
 			dispatchEventWith(StateEvent.POST_CONSTRUCT);
 		};
 		
@@ -29,6 +41,10 @@ package com.thenitro.mvcutils.statemachine {
 		};
 		
 		public function stop():void {
+		};
+
+		protected function construct():void {
+
 		};
 	};
 }
