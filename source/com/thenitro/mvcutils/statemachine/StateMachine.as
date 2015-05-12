@@ -46,9 +46,11 @@ package com.thenitro.mvcutils.statemachine {
             }
 
 			forceStopState();
+
+			var state:State = getStateByID(pStateID);
 			
-			if (!_states[pStateID]) {
-				trace("StateMachine.startState(pStateID) ERROR there is no state", pStateID);
+			if (!state) {
+				trace(this + ".startState(pStateID) ERROR there is no state", pStateID);
 				return;
 			}
 			
@@ -56,7 +58,7 @@ package com.thenitro.mvcutils.statemachine {
 			
 			_args = pArgs;
 			
-			_currState = _states[pStateID];
+			_currState = state;
 			_currState.addEventListener(StateEvent.POST_CONSTRUCT,
 										postConstructEventHandler);
 
