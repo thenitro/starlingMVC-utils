@@ -1,4 +1,4 @@
-package com.thenitro.mvcutils.statemachine {
+package mvcutils.statemachine {
     import starling.events.Event;
 
     public class StateEvent extends Event {

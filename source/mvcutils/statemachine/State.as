@@ -1,4 +1,4 @@
-package com.thenitro.mvcutils.statemachine {
+package mvcutils.statemachine {
 	import starling.display.Sprite;
 
 	public class State extends Sprite {

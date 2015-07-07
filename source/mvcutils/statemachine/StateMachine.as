@@ -1,4 +1,4 @@
-package com.thenitro.mvcutils.statemachine {
+package mvcutils.statemachine {
 	import com.creativebottle.starlingmvc.views.ViewManager;
 
 	import flash.utils.Dictionary;
@@ -6,9 +6,12 @@ package com.thenitro.mvcutils.statemachine {
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
 
-	public class StateMachine extends EventDispatcher {
+	public class StateMachine {
 		[Inject]
 		public var viewManager:ViewManager;
+
+		[Dispatcher]
+		public var dispatcher:EventDispatcher;
 		
 		private var _states:Dictionary;
 		
@@ -53,8 +56,8 @@ package com.thenitro.mvcutils.statemachine {
 				trace(this + ".startState(pStateID) ERROR there is no state", pStateID);
 				return;
 			}
-			
-			dispatchEventWith(StateEvent.STARTED, false, _prevState);
+
+			dispatcher.dispatchEventWith(StateEvent.STOPPED, false, _prevState);
 			
 			_args = pArgs;
 			
@@ -64,7 +67,7 @@ package com.thenitro.mvcutils.statemachine {
 
 			viewManager.addView(_currState);
 
-            dispatchEventWith(StateEvent.STOPPED, false, _currState);
+			dispatcher.dispatchEventWith(StateEvent.STARTED, false, _currState);
 		};
 		
 		public function stopCurrentState():void {
