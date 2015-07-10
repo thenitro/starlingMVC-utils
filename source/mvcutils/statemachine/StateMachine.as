@@ -1,17 +1,14 @@
 package mvcutils.statemachine {
-	import com.creativebottle.starlingmvc.views.ViewManager;
-
 	import flash.utils.Dictionary;
+
+	import mvcutils.views.IndexedViewManager;
 
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
 
-	public class StateMachine {
+	public class StateMachine extends EventDispatcher {
 		[Inject]
-		public var viewManager:ViewManager;
-
-		[Dispatcher]
-		public var dispatcher:EventDispatcher;
+		public var viewManager:IndexedViewManager;
 		
 		private var _states:Dictionary;
 		
@@ -20,10 +17,13 @@ package mvcutils.statemachine {
 		
 		private var _args:Array;
 		private var _prevArgs:Array;
+
+		private var _viewIndex:int;
 		
-		public function StateMachine() {
-			_states = new Dictionary();
-			
+		public function StateMachine(pViewIndex:int = -1) {
+			_viewIndex = pViewIndex;
+			_states    = new Dictionary();
+
 			super();
 		};
 		
@@ -57,7 +57,7 @@ package mvcutils.statemachine {
 				return;
 			}
 
-			dispatcher.dispatchEventWith(StateEvent.STOPPED, false, _prevState);
+			dispatchEventWith(StateEvent.STOPPED, false, _prevState);
 			
 			_args = pArgs;
 			
@@ -65,9 +65,9 @@ package mvcutils.statemachine {
 			_currState.addEventListener(StateEvent.POST_CONSTRUCT,
 										postConstructEventHandler);
 
-			viewManager.addView(_currState);
+			viewManager.addView(_currState, _viewIndex);
 
-			dispatcher.dispatchEventWith(StateEvent.STARTED, false, _currState);
+			dispatchEventWith(StateEvent.STARTED, false, _currState);
 		};
 		
 		public function stopCurrentState():void {
