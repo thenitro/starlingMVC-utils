@@ -51,13 +51,10 @@ package mvcutils.statemachine {
 			forceStopState();
 
 			var state:State = getStateByID(pStateID);
-			
 			if (!state) {
 				trace(this + ".startState(pStateID) ERROR there is no state", pStateID);
 				return;
 			}
-
-			dispatchEventWith(StateEvent.STOPPED, false, _prevState);
 			
 			_args = pArgs;
 			
@@ -93,6 +90,8 @@ package mvcutils.statemachine {
 			
 			_currState = null;
 			_args      = null;
+
+			dispatchEventWith(StateEvent.STOPPED, false, _prevState);
 		};
 		
 		private function postConstructEventHandler(pEvent:Event):void {
