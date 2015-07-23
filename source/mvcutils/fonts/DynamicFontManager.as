@@ -24,7 +24,7 @@ package mvcutils.fonts {
             var font:Font = new pFontClass();
 
             DynamicAtlas.bitmapFontFromString(chars2Add, font.fontName,
-                                              70 * scaling.textureScale,
+                                              60 * scaling.textureScale,
                                               false, false, -2);
         }
     }
