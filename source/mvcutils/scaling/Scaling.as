@@ -7,16 +7,14 @@ package mvcutils.scaling {
 
     public class Scaling {
         private var _stage:Stage;
-        private var _root:Sprite;
 
         private var _originWidth:Number;
         private var _originHeight:Number;
 
         private var _textureScale:Number;
 
-        public function Scaling(pStage:Stage, pRoot:Sprite,
+        public function Scaling(pStage:Stage,
                                 pOriginWidth:Number, pOriginHeight:Number) {
-            _root  = pRoot;
             _stage = pStage;
 
             _originWidth  = pOriginWidth;
@@ -26,10 +24,6 @@ package mvcutils.scaling {
             var scaleY:Number = pStage.stageHeight / pOriginHeight;
 
             _textureScale = Math.min(scaleX, scaleY);
-        }
-
-        public function get root():Sprite {
-            return _root;
         }
 
         public function get stage():Stage {

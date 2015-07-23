@@ -7,9 +7,6 @@ package mvcutils.localization {
     public class Localization extends EventDispatcher {
         public static const CHANGE_LANGUAGE:String = 'change_language_event';
 
-        private static var _allowInstance:Boolean;
-        private static var _instance:Localization;
-
         private var _languages:Dictionary;
 
         private var _currentLanguageID:String;
@@ -62,13 +59,15 @@ package mvcutils.localization {
                 return;
             }
 
-            for each (id in Capabilities.languages) {
-                var modifiedID:String = id.split('-')[0];
+            CONFIG::MOBILE {
+                for each (id in Capabilities.languages) {
+                    var modifiedID:String = id.split('-')[0];
 
-                if (hasLanguage(modifiedID)) {
-                    setLanguage(modifiedID);
+                    if (hasLanguage(modifiedID)) {
+                        setLanguage(modifiedID);
 
-                    return;
+                        return;
+                    }
                 }
             }
         };
