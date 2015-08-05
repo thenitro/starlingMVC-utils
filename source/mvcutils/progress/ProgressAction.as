@@ -1,5 +1,7 @@
 package mvcutils.progress {
     public class ProgressAction {
+        public static const HEADER_ID:String = 'header';
+
         private var _id:String;
 
         public function ProgressAction(pID:String) {
@@ -15,8 +17,8 @@ package mvcutils.progress {
             throw new ReferenceError('Must be overriden! In ' + this);
         }
 
-        protected function generateHeader(pResult:Object):Object {
-            pResult['header'] = _id;
+        protected final function generateHeader(pResult:Object):Object {
+            pResult[HEADER_ID] = _id;
 
             return pResult;
         }
