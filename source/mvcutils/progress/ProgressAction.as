@@ -1,6 +1,6 @@
 package mvcutils.progress {
     public class ProgressAction {
-        public static const HEADER_ID:String = 'header';
+        public static const HEADER_FIELD:String = 'header';
 
         private var _id:String;
 
@@ -18,7 +18,7 @@ package mvcutils.progress {
         }
 
         protected final function generateHeader(pResult:Object):Object {
-            pResult[HEADER_ID] = _id;
+            pResult[HEADER_FIELD] = _id;
 
             return pResult;
         }
