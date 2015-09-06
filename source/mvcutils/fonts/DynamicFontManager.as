@@ -12,7 +12,7 @@ package mvcutils.fonts {
         public function DynamicFontManager() {
         }
 
-        public function addFont(pFontClass:Class):void {
+        public function addFont(pFontClass:Class, pMaxFontSize:int):void {
             var chars2Add:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 chars2Add += chars2Add.toLowerCase() + ",.-_!?1234567890: ";
 
@@ -24,7 +24,7 @@ package mvcutils.fonts {
             var font:Font = new pFontClass();
 
             DynamicAtlas.bitmapFontFromString(chars2Add, font.fontName,
-                                              60 * scaling.textureScale,
+                                              pMaxFontSize * scaling.textureScale,
                                               false, false, -2);
         }
     }
