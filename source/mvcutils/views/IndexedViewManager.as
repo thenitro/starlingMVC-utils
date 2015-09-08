@@ -4,11 +4,12 @@ package mvcutils.views {
 
     public class IndexedViewManager {
         private var _parent:Sprite;
-        private var _indexes:Array;
+
+        private var _indexes:Vector.<IndexedVO>;
 
         public function IndexedViewManager(pParent:Sprite) {
             _parent  = pParent;
-            _indexes = [];
+            _indexes = new <IndexedVO>[];
         }
 
         public function addView(pView:DisplayObject, pIndex:int = -1):DisplayObject {
@@ -20,7 +21,7 @@ package mvcutils.views {
                 pIndex = _parent.numChildren;
             }
 
-            _indexes[pIndex] = pView;
+            _indexes.push(new IndexedVO(pView, pIndex));
             _parent.addChild(pView);
 
             updateChild();
@@ -34,7 +35,13 @@ package mvcutils.views {
             }
 
             _parent.removeChild(pView, pDispose);
-            _indexes.splice(_indexes.indexOf(pView), 1);
+            _indexes = _indexes.filter(function(pItem:IndexedVO, pIndex:int, pVector:Vector.<IndexedVO>):Boolean {
+                if (pItem.view == pView) {
+                    return false;
+                }
+
+                return true;
+            });
 
             updateChild();
         }
@@ -45,13 +52,12 @@ package mvcutils.views {
 
         [Inline]
         private function updateChild():void {
-            for (var i:int = 0; i < _indexes.length; i++) {
-                var child:DisplayObject = _indexes[i] as DisplayObject;
-                if (!child) {
-                    continue;
-                }
+            _indexes = _indexes.sort(function(pA:IndexedVO, pB:IndexedVO):Number {
+                return pA.viewIndex > pB.viewIndex ? 1 : -1;
+            });
 
-                _parent.setChildIndex(child, i);
+            for (var i:int = 0; i < _indexes.length; i++) {
+                _parent.setChildIndex(_indexes[i].view, i);
             }
         }
     }

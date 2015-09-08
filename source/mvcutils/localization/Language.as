@@ -15,7 +15,7 @@ package mvcutils.localization {
         };
 
         public function getField(pKey:String):String {
-            return _data[pKey];
+            return _data[pKey] || pKey;
         };
 
         public function addField(pKey:String, pField:String):void {
