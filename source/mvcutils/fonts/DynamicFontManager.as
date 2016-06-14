@@ -13,13 +13,17 @@ package mvcutils.fonts {
         }
 
         public function addFont(pFontClass:Class, pMaxFontSize:int):void {
-            var chars2Add:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var chars2Add:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toUpperCase();
                 chars2Add += chars2Add.toLowerCase() + ",.-_!?1234567890: ";
 
-            var chars2Add2:String = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+            var chars2Add2:String = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'.toUpperCase();
                 chars2Add2 += chars2Add2.toLowerCase();
 
+            var chars2Add3:String = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя'.toUpperCase();
+                chars2Add3 += chars2Add3.toLowerCase();
+
             chars2Add += chars2Add2;
+            chars2Add += chars2Add3;
 
             var font:Font = new pFontClass();
 
