@@ -1,8 +1,6 @@
 package mvcutils.scaling {
     import nmath.NMath;
 
-    import starling.display.Sprite;
-
     import starling.display.Stage;
 
     public class Scaling {
