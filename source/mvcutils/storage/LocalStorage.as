@@ -7,16 +7,13 @@ package mvcutils.storage {
 		private var _storage:SharedObject;
 		private var _inited:Boolean;
 		
-		public function LocalStorage() {
-		};
+		public function LocalStorage(pAppID:String) {
+			_storage = SharedObject.getLocal(pAppID);
+			_inited  = true;
+		}
 		
 		public function get inited():Boolean {
 			return _inited;
-		};
-		
-		public function init(pAppID:String):void {
-			_storage = SharedObject.getLocal(pAppID);
-			_inited  = true;
 		};
 		
 		public function load(pID:String, pDefaultValue:Object = null):* {
