@@ -13,6 +13,8 @@ package mvcutils.sounds {
 
         private var _ambientChannel:SoundChannel;
 
+        private var _isMuted:Boolean;
+
         public function AbstractSoundManager() {
             _sounds = new Dictionary();
         }
@@ -30,7 +32,7 @@ package mvcutils.sounds {
             var sound:Sound = getSound(pSoundID);
 
             var channel:SoundChannel = sound.play();
-                channel.soundTransform = new SoundTransform(pVolume);
+                channel.soundTransform = new SoundTransform(_isMuted ? 0 : pVolume);
                 channel.addEventListener(
                         Event.SOUND_COMPLETE,
                         ambientCompleteEventHandler);
@@ -56,6 +58,22 @@ package mvcutils.sounds {
 
             _ambientID = null;
             _ambientVolume = 0.0;
+        }
+
+        public function mute():void {
+            _isMuted = true;
+
+            if (_ambientChannel) {
+                _ambientChannel.soundTransform = new SoundTransform(0);
+            }
+        }
+
+        public function unmute():void {
+            _isMuted = false;
+
+            if (_ambientChannel) {
+                _ambientChannel.soundTransform = new SoundTransform(_ambientVolume);
+            }
         }
 
         [Inline]
