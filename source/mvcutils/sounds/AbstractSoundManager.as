@@ -19,6 +19,10 @@ package mvcutils.sounds {
             _sounds = new Dictionary();
         }
 
+        public function get isMuted():Boolean {
+             return _isMuted;
+        }
+
         public function playAmbientSound(pSoundID:String, pVolume:Number):void {
             if (_ambientID == pSoundID) {
                 return;
@@ -41,6 +45,10 @@ package mvcutils.sounds {
         }
 
         public function playSound(pSoundID:String, pVolume:Number):void {
+            if (_isMuted) {
+                return;
+            }
+
             var sound:Sound = getSound(pSoundID);
                 sound.play(0, 0, new SoundTransform(pVolume));
         }
@@ -61,6 +69,10 @@ package mvcutils.sounds {
         }
 
         public function mute():void {
+            if (_isMuted) {
+                return;
+            }
+
             _isMuted = true;
 
             if (_ambientChannel) {
@@ -68,7 +80,11 @@ package mvcutils.sounds {
             }
         }
 
-        public function unmute():void {
+        public function unMute():void {
+            if (!_isMuted) {
+                return;
+            }
+
             _isMuted = false;
 
             if (_ambientChannel) {
