@@ -34,10 +34,14 @@ package mvcutils.optimization {
 
         private function onAppActivate(pEvent:Event):void {
             setFrameRate(DEFAULT_FRAMERATE);
+
+            _starling.stage.addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
         }
 
         private function onAppDeactivate(pEvent:Event):void {
             setFrameRate(ONE_FRAMERATE);
+
+            _starling.stage.removeEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
         }
 
         [Inline]
