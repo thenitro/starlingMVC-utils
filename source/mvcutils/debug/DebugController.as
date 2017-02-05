@@ -26,7 +26,7 @@ package mvcutils.debug {
             var stage:Stage    = Starling.current.stage;
             var bmp:BitmapData = new BitmapData(stage.stageWidth, stage.stageHeight, false, 0x000000);
 
-            stage.drawToBitmapData(bmp, false);
+            stage.drawToBitmapData(bmp);
 
             Clipboard.generalClipboard.setData(ClipboardFormats.BITMAP_FORMAT, bmp);
 
