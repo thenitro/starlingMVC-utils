@@ -59,7 +59,9 @@ package mvcutils.optimization {
 
             var average:int = roundToNearest(_total / _frames, 10);
             if (average != _prevAverage) {
-                dispatcher.dispatchEventWith(FrameRateEvent.CHAGE, false, new FrameRateEvent(average));
+                if (dispatcher) {
+                    dispatcher.dispatchEventWith(FrameRateEvent.CHAGE, false, new FrameRateEvent(average));
+                }
 
                 _prevAverage = average;
             }
