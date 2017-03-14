@@ -3,6 +3,8 @@ package mvcutils.debug {
     import flash.desktop.ClipboardFormats;
     import flash.display.BitmapData;
 
+    import mvcutils.scaling.Scaling;
+
     import starling.core.Starling;
     import starling.display.Stage;
     import starling.events.EventDispatcher;
@@ -11,7 +13,18 @@ package mvcutils.debug {
         [Dispatcher]
         public var dispatcher:EventDispatcher;
 
+        [Inject]
+        public var scaling:Scaling;
+
         public function DebugController() {
+        }
+
+        [PostConstruct]
+        public function postConstruct():void {
+            var starling:Starling = Starling.current;
+
+            starling.showStats = true;
+            starling.showStatsAt('right', 'top', scaling.textureScale);
         }
 
         public function contextLost():void {
