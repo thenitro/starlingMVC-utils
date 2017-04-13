@@ -14,7 +14,7 @@ package mvcutils.fonts {
 
         public function addFont(pFontClass:Class, pMaxFontSize:int):void {
             var chars2Add:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toUpperCase();
-                chars2Add += chars2Add.toLowerCase() + ",.-_!?1234567890:# ";
+                chars2Add += chars2Add.toLowerCase() + ",.-_!?1234567890:# {}%";
 
             var chars2Add2:String = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'.toUpperCase();
                 chars2Add2 += chars2Add2.toLowerCase();
