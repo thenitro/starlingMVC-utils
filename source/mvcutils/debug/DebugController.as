@@ -8,6 +8,7 @@ package mvcutils.debug {
     import starling.core.Starling;
     import starling.display.Stage;
     import starling.events.EventDispatcher;
+import starling.utils.Align;
 
     public class DebugController {
         [Dispatcher]
@@ -15,6 +16,9 @@ package mvcutils.debug {
 
         [Inject]
         public var scaling:Scaling;
+
+        [Inject(source="DebugSettings")]
+        public var settings:IDebugSettings;
 
         public function DebugController() {
         }
@@ -24,7 +28,11 @@ package mvcutils.debug {
             var starling:Starling = Starling.current;
 
             starling.showStats = true;
-            starling.showStatsAt('right', 'top', scaling.textureScale);
+            starling.showStatsAt(
+                    settings.alignHorizontal, settings.alignVertical,
+                    scaling.textureScale);
+
+            starling.enableErrorChecking = true;
         }
 
         public function contextLost():void {
