@@ -4,7 +4,7 @@ package mvcutils.textures {
 	import starling.display.Stage;
 	import starling.textures.Texture;
 	
-	public class AbstractTextureManager {
+	public class AbstractTextureManager implements ITextureManager {
 		private static var _emptyBitmapData:BitmapData;
 		private static var _emptyTexture:Texture;
 
