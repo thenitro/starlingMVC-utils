@@ -1,10 +1,10 @@
 package mvcutils.views.ui {
-    import com.thenitro.santaiscomming.events.GameEvents;
-    import mvcutils.views.ui.AppUIFactory;
-    import com.thenitro.santaiscomming.managers.LocalizationManager;
-import com.thenitro.santaiscomming.managers.TextureManager;
+    import mvcutils.events.GlobalEvents;
 
-import feathers.controls.Label;
+    import mvcutils.localization.Localization;
+    import mvcutils.textures.ITextureManager;
+    
+    import feathers.controls.Label;
 
     import mvcutils.scaling.Scaling;
 
@@ -32,11 +32,11 @@ import feathers.controls.Label;
         [Inject]
         public var scaling:Scaling;
 
-        [Inject]
-        public var localization:LocalizationManager;
+        [Inject(source="LocalizationManager")]
+        public var localization:Localization;
 
-        [Inject]
-        public var textures:TextureManager;
+        [Inject(source="TextureManager")]
+        public var textures:ITextureManager;
 
         private var _localizationID:String;
         private var _textureId:String;
@@ -96,7 +96,7 @@ import feathers.controls.Label;
         private function onTouch(pEvent:TouchEvent):void {
             var touch:Touch = pEvent.getTouch(this);
             if (touch && touch.phase == TouchPhase.ENDED) {
-                dispatcher.dispatchEventWith(GameEvents.BUTTON_CLICK);
+                dispatcher.dispatchEventWith(GlobalEvents.BUTTON_CLICK);
                 alpha = 0.7;
                 juggler.delayCall(
                         function():void {

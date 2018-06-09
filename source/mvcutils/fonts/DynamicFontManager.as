@@ -12,6 +12,10 @@ package mvcutils.fonts {
         public function DynamicFontManager() {
         }
 
+        public function get fontName():String {
+            return null;
+        }
+
         public function addFont(pFontClass:Class, pMaxFontSize:int):void {
             var chars2Add:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toUpperCase();
                 chars2Add += chars2Add.toLowerCase() + ",.-_!?1234567890:# {}%";

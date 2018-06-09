@@ -1,29 +1,23 @@
 package mvcutils.views.ui {
-    import com.thenitro.santaiscomming.enum.TextureEnum;
-    import com.thenitro.santaiscomming.managers.FontManager;
-    import com.thenitro.santaiscomming.managers.LocalizationManager;
-    import mvcutils.views.ui.TButton;
-    import com.thenitro.santaiscomming.managers.TextureManager;
-
+    import mvcutils.fonts.DynamicFontManager;
+    import mvcutils.localization.Localization;
+    import mvcutils.textures.ITextureManager;
     import feathers.controls.Label;
     import feathers.text.BitmapFontTextFormat;
-
     import mvcutils.scaling.Scaling;
-
-    import starling.textures.Texture;
 
     public class AppUIFactory {
         [Inject]
         public var scaling:Scaling;
 
-        [Inject]
-        public var fonts:FontManager;
+        [Inject(source="FontManager")]
+        public var fonts:DynamicFontManager;
 
-        [Inject]
-        public var localization:LocalizationManager;
+        [Inject(source="LocalizationManager")]
+        public var localization:Localization;
 
-        [Inject]
-        public var textures:TextureManager;
+        [Inject(source="TextureManager")]
+        public var textures:ITextureManager;
 
         public function AppUIFactory() {
         }
@@ -49,7 +43,7 @@ package mvcutils.views.ui {
         }
 
         [Inline]
-        public function createButton(pTextID:String, pTextureID:String = TextureEnum.BUTTON_TEXTURE):TButton {
+        public function createButton(pTextID:String, pTextureID:String = null):TButton {
             return new TButton(pTextID, pTextureID);
         }
     }
