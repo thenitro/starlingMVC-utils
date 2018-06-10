@@ -3,7 +3,7 @@ package mvcutils.views.ui {
 
     import mvcutils.localization.Localization;
     import mvcutils.textures.ITextureManager;
-    
+
     import feathers.controls.Label;
 
     import mvcutils.scaling.Scaling;
