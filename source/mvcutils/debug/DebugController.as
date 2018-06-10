@@ -30,7 +30,7 @@ import starling.utils.Align;
             starling.showStats = true;
             starling.showStatsAt(
                     settings.alignHorizontal, settings.alignVertical,
-                    scaling.textureScale);
+                    settings.scale * scaling.textureScale);
 
             starling.enableErrorChecking = true;
         }
