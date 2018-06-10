@@ -1,4 +1,6 @@
 package mvcutils.views.ui {
+    import flash.text.TextFormatAlign;
+
     import mvcutils.fonts.DynamicFontManager;
     import mvcutils.localization.Localization;
     import mvcutils.textures.ITextureManager;
@@ -27,12 +29,12 @@ package mvcutils.views.ui {
         }
 
         [Inline]
-        public function createLabel(pTextID:String, pX:int, pY:int, pFontSize:uint, pFontColor:uint):Label {
+        public function createLabel(pTextID:String, pX:int, pY:int, pFontSize:uint, pFontColor:uint, align:String = TextFormatAlign.LEFT):Label {
             var result:Label = new Label();
                 result.textRendererProperties.textFormat =
                         new BitmapFontTextFormat(fonts.fontName,
                                 scaling.getScaledByY(pFontSize),
-                                pFontColor);
+                                pFontColor, align);
                 result.text = localization.getField(pTextID) || pTextID;
                 result.validate();
 
